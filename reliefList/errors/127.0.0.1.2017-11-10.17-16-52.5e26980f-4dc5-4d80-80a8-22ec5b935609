@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.NameError'> global name 'prodID' is not defined"
+p3
+sS'layer'
+p4
+S'/home/www-data/web2py/applications/reliefList/controllers/default.py'
+p5
+sS'code'
+p6
+S'<code object <module> at 0x7f77cdcaeab0, file "/home/www-data/web2py/applications/reliefList/controllers/default.py", line 2>'
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/home/www-data/web2py/gluon/restricted.py", line 219, in restricted\n    exec(ccode, environment)\n  File "/home/www-data/web2py/applications/reliefList/controllers/default.py", line 231, in <module>\n  File "/home/www-data/web2py/gluon/globals.py", line 414, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/www-data/web2py/applications/reliefList/controllers/default.py", line 191, in paymentDetails\n    return dict(product=prodId,amount=amount,test=rateID,test2=prodID,PK_TOKEN=\'pk_test_6pRNASCoBOKtIshFeQd4XMUh\')\nNameError: global name \'prodID\' is not defined\n'
+p11
+s.

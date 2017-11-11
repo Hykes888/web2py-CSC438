@@ -15,11 +15,11 @@ auth.settings.login_next = URL('default','home')
 Product = db.define_table(
     'productInfo',
     Field('productName',label="Product Name",requires=IS_NOT_EMPTY()),
-    Field('productDescription',label="Product Description",requires=IS_NOT_EMPTY()),
+    Field('productDescription','text',label="Product Description",requires=IS_NOT_EMPTY()),
     Field('productCategory',label="Category",requires=IS_NOT_EMPTY()),
     Field('picture','upload' ,label="Upload Image",requires=IS_NOT_EMPTY(),readable=False),
     Field('thumbnail',"upload",label="View Details"),
-    Field('comment',label="Comments on image",requires=IS_NOT_EMPTY()),
+    Field('comment','text',label="Comments on image",requires=IS_NOT_EMPTY()),
     Field('needsDelivery','boolean',default=False),
     Field('deliveryAmount'),
     Field('estDeliveryAmount',label='Est. Amount'),
@@ -31,13 +31,13 @@ db.productInfo.productCategory.requires = IS_IN_SET(PRODUCTCATEGORY)
 db.define_table(
     'productLocation',
     Field('localProductId','reference productInfo',readable=False,writable=False),
-    Field('localName',label="Name",requires=IS_NOT_EMPTY()),
-    Field('localAddress1',label="Product Address",requires=IS_NOT_EMPTY()),
-    Field('localState', label="Product State",requires=IS_NOT_EMPTY()),
-    Field('localCity', label="Product City",requires=IS_NOT_EMPTY()),
-    Field('localZipCode', label='Product Zip Code',requires=IS_NOT_EMPTY()),
-    Field('localPhone', label='Phone Number',requires=IS_NOT_EMPTY()),
-    Field('localEmail', label='Email',requires=IS_NOT_EMPTY()),
+    Field('localName',label="Name",requires=IS_NOT_EMPTY(error_message="Please enter name?")),
+    Field('localAddress1',label="Product Address",requires=IS_NOT_EMPTY(error_message="Please enter address?")),
+    Field('localState', label="Product State",requires=IS_NOT_EMPTY(error_message="Please select a list?")),
+    Field('localCity', label="Product City",requires=IS_NOT_EMPTY(error_message="Please enter city?")),
+    Field('localZipCode', label='Product Zip Code',requires=IS_NOT_EMPTY(error_message="Please enter zip code?")),
+    Field('localPhone', label='Phone Number',requires=IS_NOT_EMPTY(error_message="Please enter phone number?")),
+    Field('localEmail', label='Email',requires=IS_NOT_EMPTY(error_message="Please enter email?")),
     auth.signature)
 
 db.productLocation.localEmail.requires = IS_EMAIL(error_message="Where is the @ sign?")
@@ -65,7 +65,7 @@ db.productDest.destState.requires = IS_IN_SET(STATES)
 db.define_table(
     'productParcel',
     Field('parcelProductId','reference productInfo',readable=False,writable=False),
-    Field('productLength','integer',label="Product Length(Unit: Inch)",requires=IS_INT_IN_RANGE(0, 30)),
+    Field('productLength','integer',label="Product Length(Unit: Inch)",requires=IS_INT_IN_RANGE(0, 30,error_message="Tim")),
     Field('productWidth','integer',label="Product Width(Unit: Inch)",requires=IS_INT_IN_RANGE(0, 30)),
     Field('productHeight','integer',label="Product Height(Unit: Inch)",requires=IS_INT_IN_RANGE(0, 30)),
     Field('productWeight','integer',label="Product Weight(Unit: lb)",requires=IS_INT_IN_RANGE(0, 30)),

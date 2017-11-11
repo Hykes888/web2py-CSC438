@@ -1,0 +1,31 @@
+{{extend 'RL_Layout.html'}}
+<div class="container is-paddingless has-text-centered">
+  <section class="hero is-medium">
+    <div class="hero-body">
+      {{for postRate in shipmentInfo.rates:}}
+      <div class="box">
+        <article class="media">
+          <div class="media-left">
+            <figure class="image is-64x64">
+              <img src={{=postRate['provider_image_200']}} alt="Image">
+            </figure>
+          </div>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>{{=postRate['servicelevel']['name']}}</strong>
+                <br>
+                Estimated delivery time: {{=postRate['estimated_days']}} days
+                <br>
+                Delivery amount: ${{=postRate['amount_local']}}
+                <br>
+                <input class="button" type="button" onclick='window.location="{{=URL('default','paymentDetails',args=postRate['object_id'])}}";' value="Select"/>
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+      {{pass}}
+    </div>
+  </section>
+</div>

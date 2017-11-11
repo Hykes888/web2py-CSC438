@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S'<class \'shippo.error.AuthenticationError\'> No API key provided. (HINT: set your API key using "shippo.api_key = <API-KEY>"). You can generate API keys from the Shippo web interface.  See https://goshippo.com/api for details, or email support@goshippo.comom if you have any questions.'
+p3
+sS'layer'
+p4
+S'/home/www-data/web2py/applications/reliefList/controllers/default.py'
+p5
+sS'code'
+p6
+S'<code object <module> at 0x7f59f811ce30, file "/home/www-data/web2py/applications/reliefList/controllers/default.py", line 2>'
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/home/www-data/web2py/gluon/restricted.py", line 219, in restricted\n    exec(ccode, environment)\n  File "/home/www-data/web2py/applications/reliefList/controllers/default.py", line 192, in <module>\n  File "/home/www-data/web2py/gluon/globals.py", line 414, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/www-data/web2py/applications/reliefList/controllers/default.py", line 45, in productLocalAddress\n    validate = True\n  File "/usr/local/lib/python2.7/dist-packages/shippo/resource.py", line 186, in create\n    response, api_key = requestor.request(\'post\', url, params)\n  File "/usr/local/lib/python2.7/dist-packages/shippo/api_requestor.py", line 71, in request\n    method.lower(), url, params)\n  File "/usr/local/lib/python2.7/dist-packages/shippo/api_requestor.py", line 101, in request_raw\n    \'No API key provided. (HINT: set your API key using \'\nAuthenticationError: No API key provided. (HINT: set your API key using "shippo.api_key = <API-KEY>"). You can generate API keys from the Shippo web interface.  See https://goshippo.com/api for details, or email support@goshippo.comom if you have any questions.\n'
+p11
+s.

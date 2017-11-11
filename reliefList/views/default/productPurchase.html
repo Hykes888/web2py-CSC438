@@ -4,6 +4,9 @@
   <h2>Please enter a deliverable address.</h2>
   <section class="hero">
     <div class="hero-body">
+      {{if valid:}}
+      <h4 class="has-text-danger has-text-outlined">{{=valid}}</h2>
+      {{pass}}
       {{=formDest}}
     </div>
   </section>
