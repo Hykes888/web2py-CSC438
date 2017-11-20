@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="{{=T.accepted_language or 'en'}}"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge{{=not request.is_local and ',chrome=1' or ''}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>heicheleList</title>
+    <meta name="application-name" content="{{=request.application}}">
+    <meta name="google-site-verification" content="">
+    <link rel="stylesheet" href="{{=URL('static','css/style.css')}}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css">
+    <link rel="stylesheet" href="{{=URL('static','css/web2py.css')}}">
+    <script src="{{=URL('static','js/modernizr-2.8.3.min.js')}}"></script>
+    {{include "web2py_ajax.html"}}
+  </head>
+  <body>
+    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand navbar-item">
+        <label class="is-size-1">heicheleList</label>
+      </div>
+      {{if not auth.user:}}
+      <div class="navbar-end">
+        <a class="navbar-item" href="{{=URL('user/login')}}">Login</a>
+        <a class="navbar-item" href="{{=URL('user/register')}}">Sign Up</a>
+      </div>
+      {{else:}}
+      <div class="navbar-start">
+        <a class="navbar-item" href="{{=URL('home')}}">Home</a>
+      </div>
+      <div class="navbar-end">
+        <a class="navbar-item" href="{{=URL('user/profile')}}">Profile</a>
+        <a class="navbar-item" href="{{=URL('user/change_password')}}">Change Password</a>
+        <a class="navbar-item" href="{{=URL('user/logout')}}">Logout</a>
+      </div>
+      {{pass}}
+    </nav>
+
+    <div class="w2p_flash alert alert-dismissable">{{=response.flash or ''}}</div>
+
+    <!-- Masthead ===================================== -->
+    {{if request.function == 'index':}}
+    <section class="hero is-primary is-medium">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title is-size-1">
+            heicheleList
+          </h1>
+          <h2 class="subtitle">
+            When in need : Find your need
+          </h2>
+        </div>
+      </div>
+    </section>
+    {{else:}}
+    {{pass}}
+    <!-- Main ========================================= -->
+    <!-- Begin page content -->
+    <div>
+    {{include}}
+    </div>
+    <!-- Footer ======================================= -->
+
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>
+            heicheleList
+          </p>
+          <p>
+            When in need : Find your need
+          </p>
+        </div>
+      </div>
+    </footer>
+    <!-- The javascript =============================== -->
+    <script src="{{=URL('static','theme/vendor/jquery/jquery.min.js')}}"></script>
+
+  </body>
+</html>
