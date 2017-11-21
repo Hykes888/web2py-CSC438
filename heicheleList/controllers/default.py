@@ -45,7 +45,7 @@ def home():
 #  Function: productInput                                     #
 #  Purpose: processes the input for a new product and stores  #
 #           in a productInfo table and validates the data     #
-#           entered. Also saves the product id in the session #
+#           entered. Stores all information in a session      #
 #  DB table: productInfo                                      #
 #  Security: User must be logged in                           #
 #-------------------------------------------------------------#
@@ -53,9 +53,9 @@ def home():
 def productInput():
     formInput = SQLFORM(db.productInfo,submit_button='Next',formstyle='table2cols',fields=['productName','productDescription','productCategory','picture','comment'])
     formInput.add_button('Previous', URL('home'))
-    if formInput.process().accepted:
+    if formInput.validate():
         response.flash = 'Now please enter the location of the product?'
-        session.productID = formInput.vars.id
+        session.formInput = formInput.vars
         redirect(URL('productLocalAddress'))
     elif formInput.errors:
         response.flash = 'Please Enter all Information'
@@ -66,7 +66,8 @@ def productInput():
 #  Purpose: Processes the input of the current location of a  #
 #           product being donated. It validates that the      #
 #           address is a valid shipable US address. And also  #
-#           validates user input.                             #
+#           validates user input. Storeas all information in  #
+#           a session.                                        #
 #  DB table: productLocation                                  #
 #  Security: User must be logged in                           #
 #  API: shippo                                                #
@@ -75,7 +76,7 @@ def productInput():
 def productLocalAddress():
     localAddressForm = SQLFORM(db.productLocation,submit_button='Next',formstyle='table2cols')
     localAddressForm.add_button('Previous', URL('home'))
-    if localAddressForm.process(keepvalues=True).accepted:
+    if localAddressForm.validate():
         shippo.api_key = "shippo_test_81e32315bb414f66cf221381bc13faf9f2577125"
         address_validation = shippo.Address.create(
             name = localAddressForm.vars.localName,
@@ -90,10 +91,10 @@ def productLocalAddress():
             )
         if address_validation['validation_results']['is_valid'] == True:
             response.flash = 'Now please enter the parcel infomation of the product?'
-            db(db.productLocation.id == localAddressForm.vars.id).update(**{'localProductId':session.productID})
             session.localAddress = ""
+            session.localAddressForm = localAddressForm.vars
             redirect(URL('productParcelInfo'))
-        else:
+        elif address_validation['validation_results']['is_valid'] == False:
             session.localAddress ="Not a valid US shipping address, please enter a shipable address."
             response.flash = 'Address is not a valid US address.'
             redirect(URL('productLocalAddress'))
@@ -105,16 +106,35 @@ def productLocalAddress():
 #  Function: productParcelInfo                                #
 #  Purpose: Processes the input of the size of the product    #
 #           donated. Validates user inputs for parcels and    #
-#           stores the information.                           #
+#           stores the information of the entire entry of a   #
+#           product.                                          #
 #  DB table: productParcelInfo                                #
 #  Security: User must be logged in                           #
 #-------------------------------------------------------------#
 @auth.requires_login()
 def productParcelInfo():
     formParcel = SQLFORM(db.productParcel)
-    if formParcel.process().accepted:
+    if formParcel.validate():
         response.flash = 'Product Information is uploaded'
-        db(db.productParcel.id == formParcel.vars.id).update(**{'parcelProductId':session.productID})
+        productid = db.productInfo.insert(**{'productName':session.formInput.productName,
+                                             'productDescription':session.formInput.productDescription,
+                                             'productCategory':session.formInput.productCategory,
+                                             'picture':session.formInput.picture,
+                                             'comment':session.formInput.comment})
+        db.productLocation.insert(**{'localProductId':productid,
+                                     'localName':session.localAddressForm.localName,
+                                     'localAddress1':session.localAddressForm.localAddress1,
+                                     'localState':session.localAddressForm.localState,
+                                     'localCity':session.localAddressForm.localCity,
+                                     'localZipCode':session.localAddressForm.localZipCode,
+                                     'localPhone':session.localAddressForm.localPhone,
+                                     'localEmail':session.localAddressForm.localEmail})
+        db.productParcel.insert(**{'parcelProductId':productid,
+                                   'productLength':formParcel.vars.productLength,
+                                   'productWidth':formParcel.vars.productHeight,
+                                   'productHeight':formParcel.vars.productHeight,
+                                   'productWeight':formParcel.vars.productWeight})
+        db.commit()
         redirect(URL('home'))
     elif formParcel.errors:
         response.flash = 'Please Enter all Information'
