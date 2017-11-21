@@ -1,0 +1,31 @@
+{{extend 'RL_Layout.html'}}
+<div class="container is-paddingless has-text-centered">
+  <h1>Donation:</h1>
+  <h2>Amount: ${{=price}}</h2>
+  <section class="hero is-medium">
+    <h4>Test Account: Credit#: 4242 4242 4242 4242 04/18 111</h4>
+    <div class="hero-body is-center">
+      <div style="justify:center,width:300px">
+        <form action="{{=URL('paymentCharge')}}" method="post" id="payment-form">
+          <div class="form-row">
+            <label for="card-element">
+              Credit or debit card
+            </label>
+            <div id="card-element" style="height:40px ">
+              <!-- a Stripe Element will be inserted here. -->
+            </div>
+            <!-- Used to display Element errors -->
+            <div id="card-errors" role="alert"></div>
+          </div>
+          <input type="hidden" value="{{=amount}}" name="amount"/>
+          <button class="button is-large">Submit Payment</button>
+        </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>var PK_TOKEN = '{{=PK_TOKEN}}';</script>
+<script src="{{=URL('static', 'js/stripe.js')}}"></script>

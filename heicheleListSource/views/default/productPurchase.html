@@ -1,0 +1,13 @@
+{{extend 'RL_Layout.html'}}
+<div class="container">
+  <h1>Where is the product is this product be delivered to?</h1>
+  <h2>Please enter a deliverable address.</h2>
+  <section class="hero">
+    <div class="hero-body">
+      {{if valid:}}
+      <h4 class="has-text-danger has-text-outlined">{{=valid}}</h2>
+      {{pass}}
+      {{=formDest}}
+    </div>
+  </section>
+</div>

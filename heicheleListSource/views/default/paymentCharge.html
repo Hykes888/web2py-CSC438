@@ -1,0 +1,12 @@
+{{extend 'RL_Layout.html'}}
+<div class="container is-paddingless has-text-centered">
+  <h1>Thank you for donating!!</h1>
+  <section class="hero is-medium">
+    <div class="hero-body">
+      <div class="content">
+        <h2>Delivery donation has been {{=paid}} </h2>
+        <input class="button is-large" type="button" onclick='window.location="{{=URL('default','home')}}";' value="Home"/>
+      </div>
+    </div>
+  </section>
+</div>

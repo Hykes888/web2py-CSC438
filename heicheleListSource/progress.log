@@ -1,0 +1,17 @@
+[2017-10-18 15:36:01] START
+[2017-11-10 18:55:24] EDIT reliefList/views/RL_Layout.html: 0
+[2017-11-10 18:55:26] EDIT reliefList/views/RL_Layout.html: 0
+[2017-11-20 22:48:01] EDIT heicheleList/views/default/productParcelInfo.html: 0
+[2017-11-20 22:59:43] EDIT heicheleList/views/default/deliveryChoice.html: 0
+[2017-11-20 22:59:47] EDIT heicheleList/views/default/deliveryChoice.html: 0
+[2017-11-20 23:10:14] EDIT heicheleList/views/default/myHeicheleList.html: 0
+[2017-11-20 23:24:04] EDIT heicheleList/views/default/index.html: 0
+[2017-11-20 23:28:57] EDIT heicheleList/views/default/user.html: -3
+[2017-11-20 23:31:07] EDIT heicheleList/views/default/user.html: 3
+[2017-11-20 23:36:44] EDIT heicheleList/models/db.py: 0
+[2017-11-20 23:42:01] EDIT heicheleList/models/db.py: 1
+[2017-11-20 23:43:58] EDIT heicheleList/controllers/default.py: 0
+[2017-11-20 23:45:08] EDIT heicheleList/controllers/default.py: 0
+[2017-11-20 23:49:35] EDIT heicheleList/controllers/default.py: 0
+[2017-11-20 23:51:54] EDIT heicheleList/models/db.py: 0
+[2017-11-20 23:54:22] EDIT heicheleList/models/db.py: 0
